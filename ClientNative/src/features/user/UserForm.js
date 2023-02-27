@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react"
+import { TextInput, TouchableOpacity, View } from "react-native";
 import { useDispatch } from 'react-redux'
 
 import {
@@ -26,14 +27,12 @@ export default function UserForm(props) {
         });
     }
 
-    const handleSubmit = useCallback((event) => {
-        event.preventDefault()
+    const handleSubmit = useCallback(() => {
         dispatch(create(user.name, user.phone))
         setUser({ name: '', phone: '' })
     }, [dispatch, user])
 
-    const handleSearch = useCallback((event) => {
-        event.preventDefault()
+    const handleSearch = useCallback(() => {
         dispatch(searchUserAsync({ name: user.name, phone: user.phone }))
     }, [dispatch, user])
 
@@ -43,80 +42,94 @@ export default function UserForm(props) {
     }
 
     return (
-        <form onSubmit={
-            props.submitLabel 
-            ? handleSearch : 
-            handleSubmit}>
-            <div className="row g-1 align-items-center">
-                <div className="col-auto">
-                    <label
-                        htmlFor="name"
-                        className="col-form-label">
-                        <strong>Name</strong>
-                    </label>
-                </div>
-                <div className="col-auto">
-                    <input
-                        type="teks"
-                        id="name"
-                        name="name"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={user.name}
-                    />
-                </div>
+        <View onSubmit={
+            props.submitLabel
+                ? handleSearch :
+                handleSubmit}>
+            <View>
+                <TextInput
+                    style={{ height: 40 }}
+                    placeholder="Masukan Nama!"
+                    onChangeText={name => setUser(...user, name)}
+                    defaultValue={user.name}
+                />
 
-                <div className="col-auto">
-                    <label
-                        htmlFor="phone"
-                        className="col-form-label">
-                        <strong>Phone</strong>
-                    </label>
-                </div>
-                <div className="col-auto">
-                    <input
-                        type="teks"
-                        id="phone"
-                        name="phone"
-                        className="form-control"
-                        onChange={handleInputChange}
-                        value={user.phone}
-                    />
-                </div>
+                <TextInput
+                    style={{ height: 40 }}
+                    placeholder="Masukan Phone!"
+                    onChangeText={phone => setUser(...user, phone)}
+                    defaultValue={user.phone}
+                />
 
-                <div className="col-auto">
-                    <button type="submit" className="btn btn-success" >
-                        {props.submitLabel !== "search" &&
-                            <i className="fa-regular fa-circle-check"></i>
-                        }
-                        {props.submitLabel === "search" &&
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        }
-                        &nbsp;
+                <View>
+                    <TouchableOpacity onPress={handleSubmit} style={styles.green}>
+                        {props.submitLabel !== "search"}
+                        {props.submitLabel === "search"}
                         {props.submitLabel || "save"}
-                    </button>
+                    </TouchableOpacity>
                     &nbsp;
                     {props.submitLabel !== "search" &&
-                        <button type="submit"
-                            onClick={props.cancel}
-                            className="btn btn-warning"
-                            style={{ color: "white" }}>
-                            <i className="fa-solid fa-ban"></i>
-                            &nbsp;
-                            cancel</button>
+                        <TouchableOpacity style={styles.cancel} onPress={props.cancel}>
+                            <Text style={styles.LabelButton}> cancel</Text>
+                        </TouchableOpacity>
                     }
                     {props.submitLabel === "search" &&
-                        <button type="submit"
-                            onClick={cancelSearch}
-                            className="btn btn-warning"
-                            style={{ color: "white" }}>
-                            <i className="fa-solid fa-ban"></i>
-                            &nbsp;
-                            reset</button>
+                        <TouchableOpacity style={styles.cancel} onPress={cancelSearch}>
+                            <Text style={styles.LabelButton}> reset</Text>
+                        </TouchableOpacity>
                     }
 
-                </div>
-            </div>
-        </form>
+                </View>
+            </View>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        height: 40,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    add: {
+        height: 40,
+        width: 75,
+        backgroundColor: "blue",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    remove: {
+        height: 40,
+        width: 75,
+        backgroundColor: "red",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    green: {
+        height: 40,
+        width: 75,
+        backgroundColor: "green",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    cancel: {
+        height: 40,
+        width: 75,
+        backgroundColor: "yellow",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    LabelButton: {
+        color: "fffffff",
+    },
+});

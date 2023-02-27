@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm";
 import UserList from "./UserList";
 import { useDispatch } from 'react-redux'
+import { TouchableOpacity, View } from "react-native";
 
 export default function User(props) {
 
@@ -26,52 +27,103 @@ export default function User(props) {
     }, [dispatch])
 
     return (
-        <div className="container mt-4">
-            <div className="card shadow mb-4">
-                <div className="card-header pt-4 pb-3">
-                    <center>
-                        <h2>Phone Book Apps</h2>
-                    </center>
-                </div>
-            </div>
+        <View style={{
+            flex: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            margin: 0,
+            padding: 20
+        }}>
+
+            <View>
+                <View>
+                    <Text>hone Book Apps</Text>
+                </View>
+            </View>
 
             {user.isAdd ?
-                <div className="card shadow mb-4">
-                    <div className="card-header py-3">
-                        <h6 className="m-0 font-weight-bold">Adding Form</h6>
-                    </div>
+                <View>
+                    <View>
+                        <Text>Adding Form</Text>
+                    </View>
 
-                    <div className="card-body">
+                    <View className="card-body">
                         <UserForm
                             cancel={handleCancel}
                         />
-                    </div>
-                </div>
+                    </View>
+                </View>
                 :
-                <div className="mb-4">
-                    <button type="submit"
-                        className="btn btn-primary"
-                        onClick={handleAdd}>
-                        <i className="fa-solid fa-plus"></i>
-                        &nbsp;
-                        add
-                    </button>
-                </div>
+                <View>
+                    <TouchableOpacity onPress={handleAdd} style={styles.add}>
+                        <Text style={styles.LabelButton}>add</Text>
+                    </TouchableOpacity>
+                </View>
             }
 
-            <div className="card shadow mb-5">
-                <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold">Search Form</h6>
-                </div>
-                <div className="card-body">
+            <View>
+                <View >
+                    <Text style={styles.LabelButton}>Search Form</Text>
+                </View>
+                <View>
                     <UserForm
                         submitLabel="search"
                     />
-                </div>
-            </div>
+                </View>
+            </View>
 
             <UserList />
 
-        </div>
+        </View>
     )
-} 
+}
+
+const styles = StyleSheet.create({
+    container: {
+        height: 40,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    add: {
+        height: 40,
+        width: 75,
+        backgroundColor: "blue",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    remove: {
+        height: 40,
+        width: 75,
+        backgroundColor: "red",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    green: {
+        height: 40,
+        width: 75,
+        backgroundColor: "green",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    cancel: {
+        height: 40,
+        width: 75,
+        backgroundColor: "yellow",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    LabelButton: {
+        color: "fffffff",
+    },
+});

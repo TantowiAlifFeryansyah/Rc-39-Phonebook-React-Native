@@ -105,54 +105,53 @@ export default function UserItem(props) {
                     }
                 </Text>
 
-                    {props.data.sent ?
-                        user.isEdit ?
-                            <Text>
-                                <TouchableOpacity
-                                    className="btn btn-primary"
-                                    onPress={saveEdit}>
-                                    <i className="fa-solid fa-floppy-disk"></i>
-                                    &nbsp;
-                                    save
-                                </TouchableOpacity>
-                                &nbsp;
-                                <TouchableOpacity
-                                    className="btn btn-warning"
-                                    onPress={handleCancel}
-                                    style={{ color: "white" }}>
-                                    <i className="fa-solid fa-ban"></i>
-                                    &nbsp;
-                                    cancel
-                                </TouchableOpacity>
-                            </Text>
-                            :
-                            <Text>
-                                <TouchableOpacity
-                                    className="btn btn-success"
-                                    onPress={handleEdit}>
-                                    <FontAwesomeIcon icon={faPen} />
-                                    &nbsp;
-                                    edit
-                                </TouchableOpacity>
-                                &nbsp;
-                                <TouchableOpacity
-                                    className="btn btn-danger"
-                                    onPress={() => handleModalShowHide()}>
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                    &nbsp;
-                                    delete
-                                </TouchableOpacity>
-                            </Text>
-                        :
+                {props.data.sent ?
+                    user.isEdit ?
                         <Text>
                             <TouchableOpacity
-                                className="btn btn-warning"
-                                onPress={props.resend}
-                                style={{ color: "white" }}>
-                                resend
+                                style={styles.add}
+                                onPress={saveEdit}>
+                                <i className="fa-solid fa-floppy-disk"></i>
+                                &nbsp;
+                                save
+                            </TouchableOpacity>
+                            &nbsp;
+                            <TouchableOpacity
+                                style={styles.remove}
+                                onPress={handleCancel}>
+                                <i className="fa-solid fa-ban"></i>
+                                &nbsp;
+                                cancel
                             </TouchableOpacity>
                         </Text>
-                    }
+                        :
+                        <Text style={styles.LabelButton}>
+                            <TouchableOpacity
+                                style={styles.green}
+                                onPress={handleEdit}>
+                                <FontAwesomeIcon icon={faPen} />
+                                &nbsp;
+                                edit
+                            </TouchableOpacity>
+                            &nbsp;
+                            <TouchableOpacity
+                                style={styles.red}
+                                className="btn btn-danger"
+                                onPress={() => handleModalShowHide()}>
+                                <FontAwesomeIcon icon={faTrashCan} />
+                                &nbsp;
+                                delete
+                            </TouchableOpacity>
+                        </Text>
+                    :
+                    <Text>
+                        <TouchableOpacity
+                            style={styles.resend}
+                            onPress={props.resend}>
+                            resend
+                        </TouchableOpacity>
+                    </Text>
+                }
             </View>
 
             <Modal show={user.showHide}>
@@ -182,10 +181,28 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center"
     },
+    add: {
+        height: 40,
+        width: 75,
+        backgroundColor: "blue",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
     remove: {
         height: 40,
         width: 75,
         backgroundColor: "red",
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 5
+    },
+    green: {
+        height: 40,
+        width: 75,
+        backgroundColor: "green",
         borderStyle: "solid",
         borderColor: "white",
         borderWidth: 1,
