@@ -1,10 +1,7 @@
-import React, { Fragment, useCallback, useState } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan, faPen } from '@fortawesome/free-solid-svg-icons'
-import { Button, Modal } from 'react-bootstrap'
+import React, { useCallback, useState } from "react"
 import { useDispatch } from "react-redux"
 
-import { View, Text, TouchableOpacity } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 
 export default function UserItem(props) {
 
@@ -29,8 +26,7 @@ export default function UserItem(props) {
         });
     }
 
-    const handleEdit = useCallback((event) => {
-        event.preventDefault()
+    const handleEdit = useCallback(() => {
         setUser({
             name: user.name,
             phone: user.phone,
@@ -38,8 +34,7 @@ export default function UserItem(props) {
         });
     }, [user])
 
-    const handleCancel = useCallback((event) => {
-        event.preventDefault()
+    const handleCancel = useCallback(() => {
         setUser({
             name: props.data.name,
             phone: props.data.phone,
@@ -47,8 +42,7 @@ export default function UserItem(props) {
         });
     }, [])
 
-    const saveEdit = useCallback((event) => {
-        event.preventDefault()
+    const saveEdit = useCallback(() => {
         props.update(user.name, user.phone)
         setUser({
             ...user,
@@ -58,118 +52,92 @@ export default function UserItem(props) {
         });
     }, [dispatch, user])
 
-    const handleModalShowHide = useCallback(() => {
-        setUser({
-            showHide: true
-        })
-    }, [])
+    // const handleModalShowHide = useCallback(() => {
+    //     setUser({
+    //         showHide: true
+    //     })
+    // }, [])
 
-    const cancelHandleModalShowHide = useCallback((event) => {
-        event.preventDefault()
-        setUser({
-            name: props.data.name,
-            phone: props.data.phone,
-            showHide: false
-        })
-    }, [dispatch, user])
+    // const cancelHandleModalShowHide = useCallback((event) => {
+    //     event.preventDefault()
+    //     setUser({
+    //         name: props.data.name,
+    //         phone: props.data.phone,
+    //         showHide: false
+    //     })
+    // }, [dispatch, user])
 
     return (
-        <Fragment>
-            <View style={styles.container}>
-                <Text>{props.no}</Text>
-                <Text>
-                    {user.isEdit ?
-                        <input
-                            type="teks"
-                            name="name"
-                            value={user.name}
-                            onChange={handleInputChange}
-                            className="form-control"
-                        />
-                        :
-                        user.name
-                    }
-                </Text>
-
-                <Text>
-                    {user.isEdit ?
-                        <input
-                            type="teks"
-                            name="phone"
-                            value={user.phone}
-                            onChange={handleInputChange}
-                            className="form-control"
-                        />
-                        :
-                        user.phone
-                    }
-                </Text>
-
-                {props.data.sent ?
-                    user.isEdit ?
-                        <Text>
-                            <TouchableOpacity
-                                style={styles.add}
-                                onPress={saveEdit}>
-                                <i className="fa-solid fa-floppy-disk"></i>
-                                &nbsp;
-                                save
-                            </TouchableOpacity>
-                            &nbsp;
-                            <TouchableOpacity
-                                style={styles.remove}
-                                onPress={handleCancel}>
-                                <i className="fa-solid fa-ban"></i>
-                                &nbsp;
-                                cancel
-                            </TouchableOpacity>
-                        </Text>
-                        :
-                        <Text style={styles.LabelButton}>
-                            <TouchableOpacity
-                                style={styles.green}
-                                onPress={handleEdit}>
-                                <FontAwesomeIcon icon={faPen} />
-                                &nbsp;
-                                edit
-                            </TouchableOpacity>
-                            &nbsp;
-                            <TouchableOpacity
-                                style={styles.red}
-                                className="btn btn-danger"
-                                onPress={() => handleModalShowHide()}>
-                                <FontAwesomeIcon icon={faTrashCan} />
-                                &nbsp;
-                                delete
-                            </TouchableOpacity>
-                        </Text>
+        <View style={styles.container}>
+            <Text>{props.no}</Text>
+            <Text>
+                {user.isEdit ?
+                    <input
+                        type="teks"
+                        name="name"
+                        value={user.name}
+                        onChange={handleInputChange}
+                        className="form-control"
+                    />
                     :
+                    user.name
+                }
+            </Text>
+
+            <Text>
+                {user.isEdit ?
+                    <input
+                        type="teks"
+                        name="phone"
+                        value={user.phone}
+                        onChange={handleInputChange}
+                        className="form-control"
+                    />
+                    :
+                    user.phone
+                }
+            </Text>
+
+            {props.data.sent ?
+                user.isEdit ?
                     <Text>
                         <TouchableOpacity
-                            style={styles.resend}
-                            onPress={props.resend}>
-                            resend
+                            style={styles.add}
+                            onPress={saveEdit}>
+                            <Text>save</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.remove}
+                            onPress={handleCancel}>
+                            <Text>cancel</Text>
                         </TouchableOpacity>
                     </Text>
-                }
-            </View>
+                    :
+                    <Text style={styles.LabelButton}>
+                        <TouchableOpacity
+                            style={styles.green}
+                            onPress={handleEdit}>
+                            <Text>edit</Text>
+                        </TouchableOpacity>
 
-            <Modal show={user.showHide}>
-                <Modal.Header >
-                    <Modal.Title>Deleted Confirmation</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure, you want delete <b>{props.data.name}</b></Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onPress={cancelHandleModalShowHide}>
-                        No
-                    </Button>
-                    <Button variant="primary" onPress={props.remove}>
-                        Yes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                        <TouchableOpacity
+                            style={styles.red}
+                            onPress={props.remove}>
+                            <Text>delete</Text>
+                        </TouchableOpacity>
+                    </Text>
+                :
+                <Text>
+                    <TouchableOpacity
+                        style={styles.resend}
+                        onPress={props.resend}>
+                        <Text>resend</Text>
+                    </TouchableOpacity>
+                </Text>
+            }
+        </View>
 
-        </Fragment>
     )
 }
 

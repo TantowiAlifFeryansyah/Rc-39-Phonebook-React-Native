@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm";
 import UserList from "./UserList";
 import { useDispatch } from 'react-redux'
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 
 export default function User(props) {
 
@@ -38,7 +38,7 @@ export default function User(props) {
 
             <View>
                 <View>
-                    <Text>hone Book Apps</Text>
+                    <Text>home Book Apps</Text>
                 </View>
             </View>
 
@@ -49,32 +49,25 @@ export default function User(props) {
                     </View>
 
                     <View className="card-body">
-                        <UserForm
-                            cancel={handleCancel}
-                        />
+                        <UserForm cancel={handleCancel} />
                     </View>
                 </View>
                 :
-                <View>
-                    <TouchableOpacity onPress={handleAdd} style={styles.add}>
-                        <Text style={styles.LabelButton}>add</Text>
-                    </TouchableOpacity>
+                <View><TouchableOpacity onPress={handleAdd} style={styles.add}>
+                    <Text style={styles.LabelButton}>add</Text>
+                </TouchableOpacity>
                 </View>
             }
 
             <View>
-                <View >
+                <View>
                     <Text style={styles.LabelButton}>Search Form</Text>
                 </View>
                 <View>
-                    <UserForm
-                        submitLabel="search"
-                    />
+                    <UserForm submitLabel="search" />
                 </View>
             </View>
-
             <UserList />
-
         </View>
     )
 }

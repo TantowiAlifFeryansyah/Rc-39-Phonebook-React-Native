@@ -33,7 +33,7 @@ export default function UserList(props) {
     }, [dispatch])
 
     return (
-        <div onScroll={scrolling} style={{ overflowY: "scroll", height: 200 }}>
+        <View onScroll={scrolling} style={{ overflowY: "scroll", height: 200 }}>
             <View style={{ flex: 1, padding: 20 }}>
                 {users.map((user, index) => (
                     <UserItem
@@ -47,6 +47,6 @@ export default function UserList(props) {
                     />
                 ))}
             </View>
-        </div>
+        </View>
     )
 }

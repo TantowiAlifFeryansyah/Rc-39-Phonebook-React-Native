@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { TextInput, TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { useDispatch } from 'react-redux'
 
 import {
@@ -42,32 +42,33 @@ export default function UserForm(props) {
     }
 
     return (
-        <View onSubmit={
-            props.submitLabel
-                ? handleSearch :
-                handleSubmit}>
-            <View>
+        <View>
+            <View style={{
+                flex: 1,
+                flexDirection: "column",
+                alignContent: "flex-start",
+                alignItems: "center"
+            }}>
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Masukan Nama!"
                     onChangeText={name => setUser(...user, name)}
-                    defaultValue={user.name}
-                />
+                    defaultValue={user.name} />
 
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Masukan Phone!"
                     onChangeText={phone => setUser(...user, phone)}
-                    defaultValue={user.phone}
-                />
+                    defaultValue={user.phone} />
 
                 <View>
-                    <TouchableOpacity onPress={handleSubmit} style={styles.green}>
+                    <TouchableOpacity onPress={props.submitLabel ? handleSearch : handleSubmit}
+                        style={styles.green}>
                         {props.submitLabel !== "search"}
                         {props.submitLabel === "search"}
                         {props.submitLabel || "save"}
                     </TouchableOpacity>
-                    &nbsp;
+
                     {props.submitLabel !== "search" &&
                         <TouchableOpacity style={styles.cancel} onPress={props.cancel}>
                             <Text style={styles.LabelButton}> cancel</Text>
@@ -78,7 +79,6 @@ export default function UserForm(props) {
                             <Text style={styles.LabelButton}> reset</Text>
                         </TouchableOpacity>
                     }
-
                 </View>
             </View>
         </View>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
     add: {
         height: 40,
-        width: 75,
+        width: "100%",
         backgroundColor: "blue",
         borderStyle: "solid",
         borderColor: "white",
