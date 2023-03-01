@@ -33,6 +33,12 @@ export default function TampilanAwal() {
                                 <Text style={styles.LabelButton}>reset</Text>
                             </TouchableOpacity>
                         </View>
+                        <View>
+                            <TouchableOpacity style={styles.add}>
+                                <Text style={styles.addTeks}>add</Text>
+                            </TouchableOpacity>
+                            <View style={{borderWidth: 0.8 , alignSelf: 'center', width: 200}}></View>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     form: {
-        height: 40,
+        height: 45,
         width: '100%',
         marginTop: 5,
         padding: 10,
@@ -75,8 +81,23 @@ const styles = StyleSheet.create({
         width: '49%',
         backgroundColor: 'blue',
         borderColor: 'white',
-        borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 8,
+    },
+    add: {
+        height: 30,
+        width: 65,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        borderRadius: 8,
+        justifyContent: 'center',
+        marginTop: 10,
+        marginBottom: 25,
+    },
+    addTeks: {
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 20,
+        fontWeight: '900'
     },
     LabelButton: {
         textAlign: 'center',
