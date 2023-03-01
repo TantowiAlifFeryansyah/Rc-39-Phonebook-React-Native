@@ -72,13 +72,11 @@ export default function UserItem(props) {
             <Text>{props.no}</Text>
             <Text>
                 {user.isEdit ?
-                    <input
-                        type="teks"
-                        name="name"
-                        value={user.name}
-                        onChange={handleInputChange}
-                        className="form-control"
-                    />
+                    <TextInput
+                        style={{ height: 40 }}
+                        placeholder="Masukan Nama!"
+                        onChangeText={name => setUser(...user, name)}
+                        defaultValue={user.name} />
                     :
                     user.name
                 }
@@ -86,13 +84,11 @@ export default function UserItem(props) {
 
             <Text>
                 {user.isEdit ?
-                    <input
-                        type="teks"
-                        name="phone"
-                        value={user.phone}
-                        onChange={handleInputChange}
-                        className="form-control"
-                    />
+                    <TextInput
+                        style={{ height: 40 }}
+                        placeholder="Masukan Nama!"
+                        onChangeText={phone => setUser(...user, phone)}
+                        defaultValue={user.name} />
                     :
                     user.phone
                 }

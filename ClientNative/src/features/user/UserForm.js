@@ -53,13 +53,13 @@ export default function UserForm(props) {
                     style={{ height: 40 }}
                     placeholder="Masukan Nama!"
                     onChangeText={name => setUser(...user, name)}
-                    defaultValue={user.name} />
+                    defaultValue={user.name}/>
 
                 <TextInput
                     style={{ height: 40 }}
                     placeholder="Masukan Phone!"
                     onChangeText={phone => setUser(...user, phone)}
-                    defaultValue={user.phone} />
+                    defaultValue={user.phone}/>
 
                 <View>
                     <TouchableOpacity onPress={props.submitLabel ? handleSearch : handleSubmit}
