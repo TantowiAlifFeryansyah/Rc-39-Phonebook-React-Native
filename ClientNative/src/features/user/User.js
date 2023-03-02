@@ -2,7 +2,10 @@ import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm";
 import UserList from "./UserList";
 import { useDispatch } from 'react-redux'
-import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function User(props) {
 
@@ -12,111 +15,127 @@ export default function User(props) {
         isAdd: false,
     });
 
-    const handleAdd = useCallback((event) => {
-        event.preventDefault()
+    const handleAdd = useCallback(() => {
         setUser({
             isAdd: true
         });
     }, [dispatch])
 
-    const handleCancel = useCallback((event) => {
-        event.preventDefault()
+    const handleCancel = useCallback(() => {
         setUser({
             isAdd: false
         });
     }, [dispatch])
 
     return (
-        <View style={{
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            margin: 0,
-            padding: 20
-        }}>
-
-            <View>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+            <View style={styles.container}>
                 <View>
-                    <Text>home Book Apps</Text>
+                    <Text style={styles.title}>PhoneBook</Text>
                 </View>
-            </View>
 
-            {user.isAdd ?
-                <View>
+                <View style={styles.box}>
                     <View>
-                        <Text>Adding Form</Text>
-                    </View>
+                        <View>
+                            <TextInput
+                                style={styles.form}
+                                placeholder="Masukan Nama"
+                            />
 
-                    <View className="card-body">
-                        <UserForm cancel={handleCancel} />
-                    </View>
-                </View>
-                :
-                <View><TouchableOpacity onPress={handleAdd} style={styles.add}>
-                    <Text style={styles.LabelButton}>add</Text>
-                </TouchableOpacity>
-                </View>
-            }
+                            <TextInput
+                                style={styles.form}
+                                placeholder="Masukan Nomor"
+                            />
+                        </View>
+                        <View style={styles.row}>
+                            <TouchableOpacity style={styles.submit}>
+                                <Text style={styles.LabelButton}>search</Text>
+                            </TouchableOpacity>
 
-            <View>
-                <View>
-                    <Text style={styles.LabelButton}>Search Form</Text>
-                </View>
-                <View>
-                    <UserForm submitLabel="search" />
+                            <TouchableOpacity style={styles.submit}>
+                                <Text style={styles.LabelButton}>reset</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            {user.isAdd ?
+                                <View>
+                                    <UserForm cancel={handleCancel} />
+                                </View>
+                                :
+                                <TouchableOpacity style={styles.add} onPress={handleAdd}>
+                                    <Text style={styles.addTeks}>add</Text>
+                                </TouchableOpacity>}
+
+                            <View style={{ borderWidth: 0.8, alignSelf: 'center', width: 200 }} />
+                        </View>
+                    </View>
                 </View>
             </View>
-            <UserList />
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: 40,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
+        paddingHorizontal: windowWidth * 0.06,
+        marginVertical: windowHeight * 0.01,
+
+    },
+    title: {
+        fontSize: 32,
+        fontWeight: '700',
+        color: '#1d1d1d',
+    },
+    box: {
+        marginHorizontal: windowWidth * 0.03,
+        justifyContent: 'center',
+    },
+    form: {
+        height: 44,
+        width: '100%',
+        marginTop: 5,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 7,
+        backgroundColor: 'white',
+    },
+    row: {
+        marginTop: 5,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    submit: {
+        height: 30,
+        width: '49%',
+        backgroundColor: 'white',
+        // borderColor: 'white',
+        borderRadius: 7,
+        justifyContent: 'center',
+        borderWidth: 1,
     },
     add: {
-        height: 40,
-        width: 75,
-        backgroundColor: "blue",
-        borderStyle: "solid",
-        borderColor: "white",
+        height: 30,
+        width: 65,
+        backgroundColor: 'white',
+        // borderColor: 'white',
+        borderRadius: 7,
+        justifyContent: 'center',
+        marginTop: 10,
+        marginBottom: 15,
         borderWidth: 1,
-        borderRadius: 5
+
     },
-    remove: {
-        height: 40,
-        width: 75,
-        backgroundColor: "red",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderWidth: 1,
-        borderRadius: 5
-    },
-    green: {
-        height: 40,
-        width: 75,
-        backgroundColor: "green",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderWidth: 1,
-        borderRadius: 5
-    },
-    cancel: {
-        height: 40,
-        width: 75,
-        backgroundColor: "yellow",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderWidth: 1,
-        borderRadius: 5
+    addTeks: {
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 20,
+        fontWeight: '900'
     },
     LabelButton: {
-        color: "fffffff",
-    },
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 19,
+        letterSpacing: 1
+    }
 });

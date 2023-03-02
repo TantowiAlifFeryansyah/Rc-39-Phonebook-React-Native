@@ -1,11 +1,33 @@
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
+import { useDispatch } from 'react-redux'
+import React, { useCallback, useState } from "react"
+import UserForm2 from "./UserForm2";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function TampilanAwal() {
+
+    const dispatch = useDispatch()
+
+    const [user, setUser] = useState({
+        isAdd: false,
+    });
+
+    const handleAdd = useCallback(() => {
+        setUser({
+            isAdd: true
+        });
+    }, [dispatch])
+
+    const handleCancel = useCallback(() => {
+        setUser({
+            isAdd: false
+        });
+    }, [dispatch])
+
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "gray" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <View>
                     <Text style={styles.title}>PhoneBook</Text>
@@ -34,10 +56,16 @@ export default function TampilanAwal() {
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <TouchableOpacity style={styles.add}>
-                                <Text style={styles.addTeks}>add</Text>
-                            </TouchableOpacity>
-                            <View style={{borderWidth: 0.8 , alignSelf: 'center', width: 200}}></View>
+                            {user.isAdd ?
+                                <View>
+                                    <UserForm2 cancel={handleCancel} />
+                                </View>
+                                :
+                                <TouchableOpacity style={styles.add} onPress={handleAdd}>
+                                    <Text style={styles.addTeks}>add</Text>
+                                </TouchableOpacity>}
+
+                            <View style={{ borderWidth: 0.8, alignSelf: 'center', width: 200 }} />
                         </View>
                     </View>
                 </View>
@@ -62,16 +90,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     form: {
-        height: 45,
+        height: 44,
         width: '100%',
         marginTop: 5,
         padding: 10,
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 7,
         backgroundColor: 'white',
     },
     row: {
-        marginTop: 10,
+        marginTop: 5,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
@@ -79,19 +107,23 @@ const styles = StyleSheet.create({
     submit: {
         height: 30,
         width: '49%',
-        backgroundColor: 'blue',
-        borderColor: 'white',
-        borderRadius: 8,
+        backgroundColor: 'white',
+        // borderColor: 'white',
+        borderRadius: 7,
+        justifyContent: 'center',
+        borderWidth: 1,
     },
     add: {
         height: 30,
         width: 65,
         backgroundColor: 'white',
-        borderColor: 'white',
-        borderRadius: 8,
+        // borderColor: 'white',
+        borderRadius: 7,
         justifyContent: 'center',
         marginTop: 10,
-        marginBottom: 25,
+        marginBottom: 15,
+        borderWidth: 1,
+
     },
     addTeks: {
         textAlign: 'center',
@@ -101,7 +133,8 @@ const styles = StyleSheet.create({
     },
     LabelButton: {
         textAlign: 'center',
-        color: 'white',
-        fontSize: 20
+        color: 'black',
+        fontSize: 19,
+        letterSpacing: 1
     }
 });

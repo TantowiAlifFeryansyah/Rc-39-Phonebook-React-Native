@@ -2,16 +2,9 @@ import React, { useCallback, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 
-import {
-    create,
-    resetSearch,
-    searchUserAsync,
-} from './userSlice';
-
 const windowWidth = Dimensions.get('window').width;
 
-
-export default function UserForm(props) {
+export default function TampilanAwal(props) {
 
     const dispatch = useDispatch()
 
@@ -82,16 +75,13 @@ export default function UserForm(props) {
 
 const styles = StyleSheet.create({
     title: {
-        height: 35,
-        width: 55,
         marginTop: 10,
         fontSize: 28,
         fontWeight: 'bold',
         color: '#1d1d1d',
         textDecorationLine: 'underline',
         textDecorationStyle: 'double',
-        marginBottom: 5,
-        // borderWidth: 1
+        marginBottom: 5
     },
     box: {
         marginHorizontal: windowWidth * 0.03,

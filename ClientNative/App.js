@@ -5,13 +5,13 @@ import User from './src/features/user/User';
 
 import { store } from './src/app/store';
 
-import TampilanAwal from './src/components/TampilanAwal';
+import User2 from './src/features/user/User2';
 
 function App() {
   return (
     <Provider store={store}>
-      {/* <User /> */}
-      <TampilanAwal/>
+      <User />
+      {/* <User2/> */}
     </Provider>
   )
 }
