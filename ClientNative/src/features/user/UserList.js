@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 
 import UserItem from "../../components/UserItem";
@@ -32,21 +32,45 @@ export default function UserList(props) {
         }
     }, [dispatch])
 
+    const dataArray = [
+        {
+            id: 1,
+            name: "tantowi",
+            phone: "089657409713"
+        },
+        {
+            id: 2,
+            name: "alif",
+            phone: "089657"
+        },
+        {
+            id: 3,
+            name: "feryansyahhhhhh",
+            phone: "089657409713"
+        },
+        {
+            id: 4,
+            name: "taf",
+            phone: "089657409713444444"
+        },
+        
+    ]
     return (
-        <View onScroll={scrolling} style={{ overflowY: "scroll", height: 200 }}>
-            <View style={{ flex: 1, padding: 20 }}>
-                {users.map((user, index) => (
-                    <UserItem
-                        key={user.id}
-                        no={index + 1}
-                        data={user}
-                        sent={user.sent}
-                        remove={() => dispatch(deleteUserAsync(user.id))}
-                        resend={() => dispatch(createUserAsync({ id: user.id, name: user.name, phone: user.phone }))}
-                        update={(name, phone) => dispatch(updateUserAsync({ id: user.id, name, phone }))}
-                    />
-                ))}
-            </View>
+        <View>
+            <FlatList data={dataArray} renderItem={({ item, index }) => (
+                <UserItem
+                    key={item.id}
+                    no={index + 1}
+                    data={item}
+                    sent={item.sent}
+                    remove={() => dispatch(deleteUserAsync(item.id))}
+                    resend={() => dispatch(createUserAsync({ id: item.id, name: item.name, phone: item.phone }))}
+                    update={(name, phone) => dispatch(updateUserAsync({ id: item.id, name, phone }))}
+                />
+            )}
+                // onEndReached={() => dispatch(loadUserAsync())}
+            />
+
         </View>
     )
 }
