@@ -3,7 +3,7 @@ import UserForm from "./UserForm";
 import UserList from "./UserList";
 import UserSearch from "./UserSearch"
 import { useDispatch } from 'react-redux'
-import { Text, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,10 +37,9 @@ export default function User(props) {
 
                 <View style={styles.box}>
                     <View>
-
                         <UserSearch />
-
                         <View>
+
                             {user.isAdd ?
                                 <View>
                                     <UserForm cancel={handleCancel} />

@@ -24,31 +24,8 @@ export default function UserList(props) {
         dispatch(readUserAsync())
     }, [dispatch]);
 
-    const dataArray = [
-        {
-            id: 1,
-            name: "tantowi",
-            phone: "089657409713"
-        },
-        {
-            id: 2,
-            name: "alif",
-            phone: "089657"
-        },
-        {
-            id: 3,
-            name: "feryansyahhhhhh",
-            phone: "089657409713"
-        },
-        {
-            id: 4,
-            name: "taffffffff ffffffffff hahahah",
-            phone: "089657409713444444"
-        },
-
-    ]
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 , alignItems: "center"}}>
             <FlatList
                 data={users}
                 renderItem={({ item, index }) => (
@@ -65,7 +42,11 @@ export default function UserList(props) {
                 keyExtractor={(item) => item.id}
                 onEndReachedThreshold={0.5}
                 onEndReached={() => dispatch(loadUserAsync())}
-                style={{ maxHeight: 280, borderWidth: 1 }}
+                style={{ 
+                    maxHeight: 280, 
+                    borderWidth: 1, 
+                    // width: "96%" 
+                }}
             />
         </View>
     )

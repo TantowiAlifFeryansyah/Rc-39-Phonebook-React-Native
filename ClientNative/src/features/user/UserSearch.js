@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
         // borderColor: 'white',
         borderRadius: 7,
         justifyContent: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: 'gray'
     },
     add: {
         height: 30,
@@ -130,8 +131,9 @@ const styles = StyleSheet.create({
     },
     LabelButton: {
         textAlign: 'center',
-        color: 'black',
+        color: 'gray',
         fontSize: 19,
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontWeight: 'bold',
     }
 });

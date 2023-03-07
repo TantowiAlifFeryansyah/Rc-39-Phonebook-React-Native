@@ -58,18 +58,18 @@ export default function UserForm(props) {
                                 style={styles.form}
                                 placeholder="Masukan Nama"
                                 onChangeText={name => setUser(...user, name)}
-                                defaultValue={user.name}
+                                // defaultValue={user.name}
                             />
 
                             <TextInput
                                 style={styles.form}
                                 placeholder="Masukan Nomor"
                                 onChangeText={phone => setUser(...user, phone)}
-                                defaultValue={user.phone}
+                                // defaultValue={user.phone}
                             />
                         </View>
                         <View>
-                            <TouchableOpacity style={styles.submit}>
+                            <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
                                 <Text style={styles.LabelButton}>save</Text>
                             </TouchableOpacity>
                         </View>
@@ -114,11 +114,13 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         justifyContent: 'center',
         marginBottom: 15,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: 'gray'
     },
     LabelButton: {
         textAlign: 'center',
-        color: 'black',
+        color: 'gray',
+        fontWeight: 'bold',
         fontSize: 19,
         letterSpacing: 1,
     }
