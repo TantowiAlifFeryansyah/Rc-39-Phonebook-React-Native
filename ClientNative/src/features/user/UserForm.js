@@ -2,14 +2,9 @@ import React, { useCallback, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 
-import {
-    create,
-    resetSearch,
-    searchUserAsync,
-} from './userSlice';
+import { create } from './userSlice';
 
 const windowWidth = Dimensions.get('window').width;
-
 
 export default function UserForm(props) {
 
@@ -20,29 +15,10 @@ export default function UserForm(props) {
         phone: ''
     });
 
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        setUser({
-            ...user,
-            [name]: value,
-        });
-    }
-
     const handleSubmit = useCallback(() => {
         dispatch(create(user.name, user.phone))
         setUser({ name: '', phone: '' })
     }, [dispatch, user])
-
-    const handleSearch = useCallback(() => {
-        dispatch(searchUserAsync({ name: user.name, phone: user.phone }))
-    }, [dispatch, user])
-
-    const cancelSearch = () => {
-        dispatch(resetSearch())
-        setUser({ name: '', phone: '' })
-    }
 
     return (
         <View>
@@ -57,15 +33,15 @@ export default function UserForm(props) {
                             <TextInput
                                 style={styles.form}
                                 placeholder="Masukan Nama"
-                                onChangeText={name => setUser(...user, name)}
-                                // defaultValue={user.name}
+                                onChangeText={name => setUser({ ...user, name })}
+                                defaultValue={user.name}
                             />
 
                             <TextInput
                                 style={styles.form}
                                 placeholder="Masukan Nomor"
-                                onChangeText={phone => setUser(...user, phone)}
-                                // defaultValue={user.phone}
+                                onChangeText={phone => setUser({ ...user, phone })}
+                                defaultValue={user.phone}
                             />
                         </View>
                         <View>

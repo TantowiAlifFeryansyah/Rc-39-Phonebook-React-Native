@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions, ScrollView } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions, ScrollView, Modal } from "react-native"
 import { useCallback, useState } from "react"
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -82,9 +82,8 @@ export default function UserItem(props) {
                                     <TextInput
                                         style={{ height: 25, width: "100%", marginTop: -5, fontSize: 18, fontWeight: "bold", paddingTop: 2, paddingBottom: 2 }}
                                         placeholder="Masukan Nama!"
-                                        onChangeText={name => setUser(...user, name)}
+                                        onChangeText={name => setUser({...user, name})}
                                         defaultValue={user.name}
-
                                     />
                                     :
                                     <View>
@@ -96,7 +95,7 @@ export default function UserItem(props) {
                                     <TextInput
                                         style={{ height: 25, paddingVertical: 5, width: "100%", marginBottom: -5, fontSize: 15, paddingTop: 2, paddingBottom: 2 }}
                                         placeholder="Masukan Nomor!"
-                                        onChangeText={phone => setUser(...user, phone)}
+                                        onChangeText={phone => setUser({...user, phone})}
                                         defaultValue={user.phone}
 
                                     />
@@ -216,10 +215,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // width: 82,
         width: "35%"
-    },
-    cardBody: {
-        marginRight: 'auto',
-        marginLeft: 12
     },
     cardWrapper: {
         borderBottomWidth: 1,
