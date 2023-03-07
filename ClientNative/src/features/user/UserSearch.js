@@ -7,7 +7,7 @@ import { resetSearch, searchUserAsync } from './userSlice';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function UserForm(props) {
+export default function UserSearch() {
 
     const dispatch = useDispatch()
 

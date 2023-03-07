@@ -13,7 +13,6 @@ import {
     loadUserAsync
 } from './userSlice';
 
-
 export default function UserList(props) {
 
     const users = useSelector(selectUser)
@@ -25,7 +24,7 @@ export default function UserList(props) {
     }, [dispatch]);
 
     return (
-        <View style={{ flex: 1 , alignItems: "center"}}>
+        <View style={{alignItems: "center"}}>
             <FlatList
                 data={users}
                 renderItem={({ item, index }) => (

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions, ScrollView, Modal } from "react-native"
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions, ScrollView } from "react-native"
 import { useCallback, useState } from "react"
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -16,18 +16,6 @@ export default function UserItem(props) {
         isEdit: false,
         showHide: false
     })
-
-    const handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        const phone = target.phone
-        setUser({
-            ...user,
-            [name]: value,
-            [phone]: value
-        });
-    }
 
     const handleEdit = useCallback(() => {
         setUser({
