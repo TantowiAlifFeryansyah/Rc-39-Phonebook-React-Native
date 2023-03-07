@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FlatList, View } from "react-native";
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -24,14 +24,6 @@ export default function UserList(props) {
         dispatch(readUserAsync())
     }, [dispatch]);
 
-    const scrolling = useCallback((event) => {
-        var element = event.target;
-        if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-            // console.log('ini scroll');
-            dispatch(loadUserAsync())
-        }
-    }, [dispatch])
-
     const dataArray = [
         {
             id: 1,
@@ -53,24 +45,28 @@ export default function UserList(props) {
             name: "taffffffff ffffffffff hahahah",
             phone: "089657409713444444"
         },
-        
+
     ]
     return (
-        <View>
-            <FlatList data={dataArray} renderItem={({ item, index }) => (
-                <UserItem
-                    key={item.id}
-                    no={index + 1}
-                    data={item}
-                    sent={item.sent}
-                    remove={() => dispatch(deleteUserAsync(item.id))}
-                    resend={() => dispatch(createUserAsync({ id: item.id, name: item.name, phone: item.phone }))}
-                    update={(name, phone) => dispatch(updateUserAsync({ id: item.id, name, phone }))}
-                />
-            )}
-                // onEndReached={() => dispatch(loadUserAsync())}
+        <View style={{ flex: 1 }}>
+            <FlatList
+                data={users}
+                renderItem={({ item, index }) => (
+                    <UserItem
+                        key={item.id}
+                        no={index + 1}
+                        data={item}
+                        sent={item.sent}
+                        remove={() => dispatch(deleteUserAsync(item.id))}
+                        resend={() => dispatch(createUserAsync({ id: item.id, name: item.name, phone: item.phone }))}
+                        update={(name, phone) => dispatch(updateUserAsync({ id: item.id, name, phone }))}
+                    />
+                )}
+                keyExtractor={(item) => item.id}
+                onEndReachedThreshold={0.5}
+                onEndReached={() => dispatch(loadUserAsync())}
+                style={{ maxHeight: 280, borderWidth: 1 }}
             />
-
         </View>
     )
 }

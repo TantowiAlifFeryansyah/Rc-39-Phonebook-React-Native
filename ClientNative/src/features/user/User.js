@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react"
 import UserForm from "./UserForm";
 import UserList from "./UserList";
+import UserSearch from "./UserSearch"
 import { useDispatch } from 'react-redux'
 import { Text, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
 
@@ -36,26 +37,9 @@ export default function User(props) {
 
                 <View style={styles.box}>
                     <View>
-                        <View>
-                            <TextInput
-                                style={styles.form}
-                                placeholder="Masukan Nama"
-                            />
 
-                            <TextInput
-                                style={styles.form}
-                                placeholder="Masukan Nomor"
-                            />
-                        </View>
-                        <View style={styles.row}>
-                            <TouchableOpacity style={styles.submit}>
-                                <Text style={styles.LabelButton}>search</Text>
-                            </TouchableOpacity>
+                        <UserSearch />
 
-                            <TouchableOpacity style={styles.submit}>
-                                <Text style={styles.LabelButton}>reset</Text>
-                            </TouchableOpacity>
-                        </View>
                         <View>
                             {user.isAdd ?
                                 <View>
