@@ -6,7 +6,7 @@ import { create } from './userSlice';
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function UserForm(props) {
+export default function UserForm() {
 
     const dispatch = useDispatch()
 
@@ -22,82 +22,50 @@ export default function UserForm(props) {
 
     return (
         <View>
-            <View >
-                <View>
-                    <Text style={styles.title} onPress={props.cancel}>Add</Text>
-                </View>
+            <View>
+                <TextInput
+                    style={styles.form}
+                    placeholder="insert new name"
+                    onChangeText={name => setUser({ ...user, name })}
+                    defaultValue={user.name}
+                />
 
-                <View>
-                    <View>
-                        <View>
-                            <TextInput
-                                style={styles.form}
-                                placeholder="Masukan Nama"
-                                onChangeText={name => setUser({ ...user, name })}
-                                defaultValue={user.name}
-                            />
-
-                            <TextInput
-                                style={styles.form}
-                                placeholder="Masukan Nomor"
-                                onChangeText={phone => setUser({ ...user, phone })}
-                                defaultValue={user.phone}
-                            />
-                        </View>
-                        <View>
-                            <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
-                                <Text style={styles.LabelButton}>save</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
+                <TextInput
+                    style={styles.form}
+                    placeholder="insert new number"
+                    onChangeText={phone => setUser({ ...user, phone })}
+                    defaultValue={user.phone}
+                />
+            </View>
+            <View style={{ marginTop: 5 }}>
+                <TouchableOpacity style={{
+                    height: 30,
+                    width: '100%',
+                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 7,
+                    justifyContent: 'center',
+                    elevation: 2,
+                }} onPress={handleSubmit}>
+                    <Text style={{
+                        textAlign: 'center',
+                        color: user.name.length > 0 || user.phone.length > 0 ? '#ffffff' : '#85b35a',
+                        fontSize: 19,
+                        letterSpacing: 1,
+                        fontWeight: 'bold',
+                    }}>save</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    title: {
-        height: 35,
-        width: 55,
-        marginTop: 10,
-        fontSize: 28,
-        fontWeight: 'bold',
-        color: '#1d1d1d',
-        textDecorationLine: 'underline',
-        textDecorationStyle: 'double',
-        marginBottom: 5,
-        // borderWidth: 1
-    },
-    box: {
-        marginHorizontal: windowWidth * 0.03,
-        justifyContent: 'center',
-    },
     form: {
         height: 44,
         width: '100%',
+        marginTop: 5,
         padding: 10,
-        borderWidth: 1,
-        borderRadius: 7,
+        elevation: 2,
+        borderRadius: 5,
         backgroundColor: 'white',
-        marginBottom: 5
     },
-    submit: {
-        height: 30,
-        width: '100%',
-        backgroundColor: 'white',
-        // borderColor: 'white',
-        borderRadius: 7,
-        justifyContent: 'center',
-        marginBottom: 15,
-        borderWidth: 2,
-        borderColor: 'gray'
-    },
-    LabelButton: {
-        textAlign: 'center',
-        color: 'gray',
-        fontWeight: 'bold',
-        fontSize: 19,
-        letterSpacing: 1,
-    }
 });

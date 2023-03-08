@@ -54,23 +54,29 @@ export default function UserItem(props) {
                             flexDirection: 'row',
                             // flex: 1, 
                             width: "75%",
-                            // borderWidth: 1,
-                            borderColor: "blue",
                             justifyContent: 'center',
                             alignItems: 'center',
                         }}>
                             <Text style={styles.no}>{props.no}</Text>
 
                             <View style={styles.icon}>
-                                <Icon name="person-circle" size={50} color="gray" />
+                                <Icon name="person-circle-outline" size={50} color="#173e07" />
                             </View>
 
                             <View style={styles.card}>
                                 {user.isEdit ?
                                     <TextInput
-                                        style={{ height: 25, width: "100%", marginTop: -5, fontSize: 18, fontWeight: "bold", paddingTop: 2, paddingBottom: 2 }}
+                                        style={{
+                                            height: 25,
+                                            width: "100%",
+                                            marginTop: -5,
+                                            fontSize: 18,
+                                            fontWeight: "bold",
+                                            paddingTop: 2,
+                                            paddingBottom: 2,
+                                        }}
                                         placeholder="Masukan Nama!"
-                                        onChangeText={name => setUser({...user, name})}
+                                        onChangeText={name => setUser({ ...user, name })}
                                         defaultValue={user.name}
                                     />
                                     :
@@ -83,7 +89,7 @@ export default function UserItem(props) {
                                     <TextInput
                                         style={{ height: 25, paddingVertical: 5, width: "100%", marginBottom: -5, fontSize: 15, paddingTop: 2, paddingBottom: 2 }}
                                         placeholder="Masukan Nomor!"
-                                        onChangeText={phone => setUser({...user, phone})}
+                                        onChangeText={phone => setUser({ ...user, phone })}
                                         defaultValue={user.phone}
 
                                     />
@@ -100,25 +106,25 @@ export default function UserItem(props) {
                         <View style={styles.buttonList}>
                             {props.data.sent ? user.isEdit ?
                                 <View style={{ flexDirection: "row" }}>
-                                    <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={saveEdit}>
-                                        <Icon name="save-outline" size={30} color="gray" />
+                                    <TouchableOpacity style={{ marginHorizontal: 10, elevation: 2 }} onPress={saveEdit}>
+                                        <Icon name="save" size={30} color="#85b35a" />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ marginHorizontal: 2 }} onPress={handleCancel}>
-                                        <Icon name="arrow-back-circle-outline" size={30} color="gray" />
+                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={handleCancel}>
+                                        <Icon name="arrow-back-circle" size={30} color="#bdd9a0" />
                                     </TouchableOpacity>
                                 </View>
                                 :
                                 <View style={{ flexDirection: "row" }}>
-                                    <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={handleEdit}>
-                                        <Icon name="create-outline" size={30} color="gray" />
+                                    <TouchableOpacity style={{ marginHorizontal: 10, elevation: 2 }} onPress={handleEdit}>
+                                        <Icon name="create" size={30} color="#4a8122" />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ marginHorizontal: 2 }} onPress={props.remove}>
-                                        <Icon name="close-circle-outline" size={30} color="gray" />
+                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.remove}>
+                                        <Icon name="close-circle" size={30} color="#85b35a" />
                                     </TouchableOpacity>
                                 </View>
                                 :
-                                <TouchableOpacity style={{ marginHorizontal: 2 }} onPress={props.resend}>
-                                    <Icon name="send-outline" size={30} color="gray" />
+                                <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.resend}>
+                                    <Icon name="refresh-circle" size={30} color="#4a8122" />
                                 </TouchableOpacity>
                             }
                         </View>
@@ -136,14 +142,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: windowWidth * 0.06,
         // marginVertical: windowHeight * 0.01,
     },
-    title: {
-        fontSize: 32,
-        fontWeight: '700',
-        color: '#1d1d1d',
-    },
-    box: {
-        marginHorizontal: windowWidth * 0.03,
-        justifyContent: 'center',
+    cardWrapper: {
+        borderBottomWidth: 1.5,
+        borderColor: '#173e07'
     },
     cardList: {
         // paddingVertical: 20,
@@ -155,7 +156,6 @@ const styles = StyleSheet.create({
     },
     no: {
         alignItems: 'center',
-        // borderWidth: 1,
         textAlign: 'center',
         paddingVertical: 15,
         fontSize: 20,
@@ -172,40 +172,29 @@ const styles = StyleSheet.create({
         width: "25%"
     },
     card: {
-        // paddingVertical: 10,
-        // flexDirection: 'column',
         paddingBottom: 5,
         paddingTop: 5,
         justifyContent: 'flex-start',
-        // borderWidth: 1,
         borderColor: "red",
         // width: '75%',
         width: '70%',
     },
     cardTitleName: {
-        // borderWidth: 1,
-        color: 'black',
+        color: '#173e07',
         fontWeight: '700',
         fontSize: 18
     },
     cardTitlePhone: {
-        // borderWidth: 1,
         color: 'gray',
         fontWeight: '500',
         fontSize: 15,
     },
     buttonList: {
-        // flex: 2,
-        // borderWidth: 1,
         borderColor: "red",
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         // width: 82,
         width: "35%"
-    },
-    cardWrapper: {
-        borderBottomWidth: 1,
-        borderColor: 'gray'
     },
 });

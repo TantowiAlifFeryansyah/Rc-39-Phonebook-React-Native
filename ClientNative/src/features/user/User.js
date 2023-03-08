@@ -14,17 +14,29 @@ export default function User(props) {
 
     const [user, setUser] = useState({
         isAdd: false,
+        isSearch: false,
+        activeMenu: '',
     });
 
     const handleAdd = useCallback(() => {
         setUser({
-            isAdd: true
+            isAdd: true,
+            activeMenu: 'Add',
         });
     }, [dispatch])
 
-    const handleCancel = useCallback(() => {
+    const cancel = useCallback(() => {
         setUser({
-            isAdd: false
+            isAdd: false,
+            isSearch: false,
+
+        });
+    }, [dispatch])
+
+    const handleSearch = useCallback(() => {
+        setUser({
+            isSearch: true,
+            activeMenu: 'Search',
         });
     }, [dispatch])
 
@@ -32,26 +44,83 @@ export default function User(props) {
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.title}>PhoneBook</Text>
+                    <TouchableOpacity onPress={cancel}>
+                        <Text style={styles.title}>PhoneBook</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.box}>
+
                     <View>
-                        <UserSearch />
-                        <View>
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 5,
+                            marginBottom: 5,
+                            paddingVertical: 5,
+                            paddingHorizontal: 5,
+                            borderRadius: 10,
+                            backgroundColor: '#ffffff',
+                            elevation: 2,
+                            width: '100%',
+                        }}>
+                            <TouchableOpacity style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: user.activeMenu == 'Search' ? '#4a8122' : '#ffffff',
+                                elevation: user.activeMenu == 'Search' ? 2 : 0,
+                                paddingVertical: 10,
+                                borderRadius: 10,
+                            }}
+                                onPress={handleSearch}
+                            >
+                                <Text style={{ color: user.activeMenu == 'Search' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                                    search
+                                </Text>
+                            </TouchableOpacity>
 
-                            {user.isAdd ?
-                                <View>
-                                    <UserForm cancel={handleCancel} />
-                                </View>
-                                :
-                                <TouchableOpacity style={styles.add} onPress={handleAdd}>
-                                    <Text style={styles.addTeks}>add</Text>
-                                </TouchableOpacity>}
+                            <TouchableOpacity style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: user.activeMenu == 'Add' ? '#4a8122' : '#ffffff',
+                                elevation: user.activeMenu == 'Add' ? 2 : 0,
+                                paddingVertical: 10,
+                                borderRadius: 10,
+                            }}
+                                onPress={handleAdd}
+                            >
+                                <Text style={{ color: user.activeMenu == 'Add' ? '#ffffff' : '#4a8122', fontWeight: 'bold', letterSpacing: 1, fontSize: 19, margin: -2 }}>
+                                    add
+                                </Text>
+                            </TouchableOpacity>
 
-                            <View style={{ borderWidth: 0.8, alignSelf: 'center', width: 200 }} />
                         </View>
                     </View>
+
+                    <View>
+                        <View>
+                            {user.isAdd ?
+                                <View>
+                                    <UserForm />
+                                </View>
+                                :
+                                ''
+                            }
+                        </View>
+
+                        <View>
+                            {user.isSearch ?
+                                <View>
+                                    <UserSearch />
+                                </View>
+                                :
+                                ''
+                            }
+                        </View>
+                        <View style={{ marginTop: 15 }} />
+                    </View>
+
                 </View>
             </View>
             <UserList />
@@ -62,64 +131,17 @@ export default function User(props) {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: windowWidth * 0.06,
-        marginVertical: windowHeight * 0.01,
-
+        // marginVertical: windowHeight * 0.01,
+        backgroundColor: '#e9f3e0'
     },
     title: {
         fontSize: 32,
         fontWeight: '700',
-        color: '#1d1d1d',
+        color: '#173e07',
+        marginTop: 10
     },
     box: {
         marginHorizontal: windowWidth * 0.03,
         justifyContent: 'center',
     },
-    form: {
-        height: 44,
-        width: '100%',
-        marginTop: 5,
-        padding: 10,
-        borderWidth: 1,
-        borderRadius: 7,
-        backgroundColor: 'white',
-    },
-    row: {
-        marginTop: 5,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-    },
-    submit: {
-        height: 30,
-        width: '49%',
-        backgroundColor: 'white',
-        // borderColor: 'white',
-        borderRadius: 7,
-        justifyContent: 'center',
-        borderWidth: 1,
-    },
-    add: {
-        height: 30,
-        width: 65,
-        backgroundColor: 'white',
-        // borderColor: 'white',
-        borderRadius: 7,
-        justifyContent: 'center',
-        marginTop: 10,
-        marginBottom: 15,
-        borderWidth: 1,
-
-    },
-    addTeks: {
-        textAlign: 'center',
-        color: 'black',
-        fontSize: 20,
-        fontWeight: '900'
-    },
-    LabelButton: {
-        textAlign: 'center',
-        color: 'black',
-        fontSize: 19,
-        letterSpacing: 1
-    }
 });

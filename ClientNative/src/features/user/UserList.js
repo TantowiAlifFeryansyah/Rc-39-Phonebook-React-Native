@@ -42,8 +42,8 @@ export default function UserList(props) {
                 onEndReachedThreshold={0.5}
                 onEndReached={() => dispatch(loadUserAsync())}
                 style={{ 
-                    maxHeight: 280, 
-                    borderWidth: 1, 
+                    maxHeight: 570, 
+                    // borderWidth: 1, 
                     // width: "96%" 
                 }}
             />
