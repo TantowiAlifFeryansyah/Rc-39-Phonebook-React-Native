@@ -13,7 +13,7 @@ import {
     loadUserAsync
 } from './userSlice';
 
-export default function UserList(props) {
+export default function UserList() {
 
     const users = useSelector(selectUser)
 
@@ -42,7 +42,7 @@ export default function UserList(props) {
                 onEndReachedThreshold={0.5}
                 onEndReached={() => dispatch(loadUserAsync())}
                 style={{ 
-                    maxHeight: 570, 
+                    maxHeight: 580, 
                     // borderWidth: 1, 
                     // width: "96%" 
                 }}

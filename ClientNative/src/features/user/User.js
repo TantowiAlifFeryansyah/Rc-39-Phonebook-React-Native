@@ -29,7 +29,6 @@ export default function User(props) {
         setUser({
             isAdd: false,
             isSearch: false,
-
         });
     }, [dispatch])
 

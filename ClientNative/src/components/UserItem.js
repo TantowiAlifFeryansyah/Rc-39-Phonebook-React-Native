@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux"
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions, ScrollView } from "react-native"
 import { useCallback, useState } from "react"
 import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from "react-native-modal";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,7 +16,8 @@ export default function UserItem(props) {
         name: props.data.name,
         phone: props.data.phone,
         isEdit: false,
-        showHide: false
+        showHide: false,
+        modal: false
     })
 
     const handleEdit = useCallback(() => {
@@ -42,6 +45,22 @@ export default function UserItem(props) {
             isEdit: false
         });
     }, [dispatch, user])
+
+    const showModal = useCallback(() => {
+        setUser({
+            name: props.data.name,
+            phone: props.data.phone,
+            modal: true
+        });
+    }, [dispatch])
+
+    const hideModal = useCallback(() => {
+        setUser({
+            name: props.data.name,
+            phone: props.data.phone,
+            modal: false
+        });
+    }, [dispatch])
 
     return (
         <View style={{ flex: 1 }}>
@@ -118,7 +137,7 @@ export default function UserItem(props) {
                                     <TouchableOpacity style={{ marginHorizontal: 10, elevation: 2 }} onPress={handleEdit}>
                                         <Icon name="create" size={30} color="#4a8122" />
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={props.remove}>
+                                    <TouchableOpacity style={{ marginHorizontal: 2, elevation: 2 }} onPress={showModal}>
                                         <Icon name="close-circle" size={30} color="#85b35a" />
                                     </TouchableOpacity>
                                 </View>
@@ -133,8 +152,85 @@ export default function UserItem(props) {
 
                 </View>
             </ScrollView>
+
+            <View>
+                <Modal isVisible={user.modal}>
+                    <View style={{
+                        backgroundColor: '#ffffff',
+                        paddingVertical: 20,
+                        paddingHorizontal: 20,
+                        borderRadius: 6,
+                    }}>
+                        <View style={{
+                            alignItems: 'center',
+                            borderColor: '#ffffff',
+                            bottom: 85
+                        }}>
+                            <Icon name="alert-circle" size={80} color="#173e07"
+                                style={{
+                                    position: 'absolute',
+                                    backgroundColor: '#ffffff',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: 85,
+                                    height: 85,
+                                    paddingHorizontal: 5,
+                                    borderRadius: 50,
+                                    zIndex: 1
+                                }} />
+                        </View>
+
+                        <Text style={{
+                            fontSize: 25,
+                            fontWeight: 'bold',
+                            color: '#173e07',
+                            textAlign: 'center',
+                            marginTop: 0
+                        }}>
+                            Deleted Confirmation
+                        </Text>
+                        <Text style={{ textAlign: 'center', fontSize: 17, }}>
+                            Are you sure, you want delete it?
+                        </Text>
+
+                        <View style={{
+                            marginTop: 20,
+                            flexDirection: 'row',
+                            flexWrap: 'wrap',
+                            justifyContent: 'center',
+                            width: '100%',
+                        }}>
+                            <TouchableOpacity style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#85b35a',
+                                paddingVertical: 5,
+                                borderRadius: 50,
+                                elevation: 3,
+                                width: '20%',
+                                marginHorizontal: 7
+                            }} onPress={hideModal}>
+                                <Text style={{ color: '#ffffff' }}> No</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: '#4a8122',
+                                paddingVertical: 5,
+                                borderRadius: 50,
+                                elevation: 3,
+                                width: '20%',
+                                marginHorizontal: 7
+                            }} onPress={props.remove}>
+                                <Text style={{ color: '#ffffff' }}> Yes</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
         </View>
     )
+
 }
 
 const styles = StyleSheet.create({
