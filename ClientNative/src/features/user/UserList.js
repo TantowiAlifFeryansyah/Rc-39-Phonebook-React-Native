@@ -25,11 +25,11 @@ export default function UserList() {
 
     return (
         <KeyboardAvoidingView
-        style={{flex: 1}}
+            style={{ flex: 1 }}
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             enabled={Platform.OS === "ios" ? true : false}>
-            <View style={{ flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <FlatList
                     data={users}
                     renderItem={({ item, index }) => (
