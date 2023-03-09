@@ -16,7 +16,6 @@ export default function UserItem(props) {
         name: props.data.name,
         phone: props.data.phone,
         isEdit: false,
-        showHide: false,
         modal: false
     })
 
@@ -34,7 +33,7 @@ export default function UserItem(props) {
             phone: props.data.phone,
             isEdit: false
         });
-    }, [])
+    })
 
     const saveEdit = useCallback(() => {
         props.update(user.name, user.phone)
@@ -52,7 +51,7 @@ export default function UserItem(props) {
             phone: props.data.phone,
             modal: true
         });
-    }, [dispatch])
+    })
 
     const hideModal = useCallback(() => {
         setUser({
@@ -60,7 +59,7 @@ export default function UserItem(props) {
             phone: props.data.phone,
             modal: false
         });
-    }, [dispatch])
+    })
 
     return (
         <View style={{ flex: 1 }}>
@@ -93,7 +92,10 @@ export default function UserItem(props) {
                                             fontWeight: "bold",
                                             paddingTop: 2,
                                             paddingBottom: 2,
+                                            color: '#4a8122'
+
                                         }}
+                                        placeholderTextColor="gray"
                                         placeholder="Masukan Nama!"
                                         onChangeText={name => setUser({ ...user, name })}
                                         defaultValue={user.name}
@@ -106,7 +108,17 @@ export default function UserItem(props) {
 
                                 {user.isEdit ?
                                     <TextInput
-                                        style={{ height: 25, paddingVertical: 5, width: "100%", marginBottom: -5, fontSize: 15, paddingTop: 2, paddingBottom: 2 }}
+                                        style={{
+                                            height: 25,
+                                            paddingVertical: 5,
+                                            width: "100%",
+                                            marginBottom: -5,
+                                            fontSize: 15,
+                                            paddingTop: 2,
+                                            paddingBottom: 2,
+                                            color: '#4a8122'
+                                        }}
+                                        placeholderTextColor="gray"
                                         placeholder="Masukan Nomor!"
                                         onChangeText={phone => setUser({ ...user, phone })}
                                         defaultValue={user.phone}
@@ -189,12 +201,12 @@ export default function UserItem(props) {
                         }}>
                             Deleted Confirmation
                         </Text>
-                        <Text style={{ textAlign: 'center', fontSize: 17, }}>
+                        <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray'}}>
                             Are you sure you want delete it?
                         </Text>
-                        <Text style={{textAlign: 'center', fontSize: 17, fontWeight: 'bold'}}>
+                        <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: 'bold', color: '#173e07' }}>
                             " {props.data.name} "
-                            </Text>
+                        </Text>
 
                         <View style={{
                             marginTop: 15,

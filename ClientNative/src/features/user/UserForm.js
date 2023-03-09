@@ -25,6 +25,7 @@ export default function UserForm() {
             <View>
                 <TextInput
                     style={styles.form}
+                    placeholderTextColor= "#85b35a"
                     placeholder="insert new name"
                     onChangeText={name => setUser({ ...user, name })}
                     defaultValue={user.name}
@@ -32,6 +33,7 @@ export default function UserForm() {
 
                 <TextInput
                     style={styles.form}
+                    placeholderTextColor="#85b35a"
                     placeholder="insert new number"
                     onChangeText={phone => setUser({ ...user, phone })}
                     defaultValue={user.phone}
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
         borderRadius: 5,
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
+        color: '#173e07'
     },
 });

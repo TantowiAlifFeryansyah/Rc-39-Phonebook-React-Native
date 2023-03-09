@@ -27,6 +27,7 @@ export default function UserSearch() {
             <View>
                 <TextInput
                     style={styles.form}
+                    placeholderTextColor="#85b35a"
                     placeholder="insert name"
                     onChangeText={name => setUser({ ...user, name })}
                     defaultValue={user.name}
@@ -34,6 +35,7 @@ export default function UserSearch() {
 
                 <TextInput
                     style={styles.form}
+                    placeholderTextColor="#85b35a"
                     placeholder="insert number"
                     onChangeText={phone => setUser({ ...user, phone })}
                     defaultValue={user.phone}
@@ -87,7 +89,8 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
         borderRadius: 5,
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
+        color: '#173e07',
     },
     row: {
         marginTop: 5,

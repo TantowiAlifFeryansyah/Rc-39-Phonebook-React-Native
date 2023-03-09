@@ -43,9 +43,21 @@ export default function User(props) {
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <View>
-                    <TouchableOpacity onPress={cancel}>
+                    {user.activeMenu == 'Search' || user.activeMenu == 'Add' ?
+                        <TouchableOpacity onPress={cancel}>
+                            <Text style={{
+                                fontSize: 32,
+                                fontWeight: '700',
+                                color: '#173e07',
+                                marginTop: 10,
+                                textDecorationLine: user.activeMenu == 'Search' || user.activeMenu == 'Add' ? 'underline' : 'none',
+                            }}>
+                                PhoneBook
+                            </Text>
+                        </TouchableOpacity>
+                        :
                         <Text style={styles.title}>PhoneBook</Text>
-                    </TouchableOpacity>
+                    }
                 </View>
 
                 <View style={styles.box}>
@@ -137,7 +149,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: '700',
         color: '#173e07',
-        marginTop: 10
+        marginTop: 10,
     },
     box: {
         marginHorizontal: windowWidth * 0.03,
