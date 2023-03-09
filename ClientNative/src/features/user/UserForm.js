@@ -43,7 +43,7 @@ export default function UserForm() {
                 <TouchableOpacity style={{
                     height: 30,
                     width: '100%',
-                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 7,
+                    backgroundColor: user.name.length > 0 || user.phone.length > 0 ? '#85b35a' : '#ffffff', borderRadius: 5,
                     justifyContent: 'center',
                     elevation: 2,
                 }} onPress={handleSubmit}>

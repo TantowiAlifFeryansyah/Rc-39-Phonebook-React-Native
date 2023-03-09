@@ -262,8 +262,8 @@ export const edit = (id, name, phone) => (dispatch, getState) => {
     dispatch(updateUserAsync({ id, name, phone }))
 };
 
-export const resetSearch = () => (dispatch, getState) => {
-    dispatch(reset())
+export const resetSearch = () => async (dispatch, getState) => {
+    await dispatch(reset())
     dispatch(loadUserAsync())
 };
 

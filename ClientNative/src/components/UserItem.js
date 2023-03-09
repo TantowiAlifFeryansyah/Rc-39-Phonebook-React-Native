@@ -65,9 +65,7 @@ export default function UserItem(props) {
         <View style={{ flex: 1 }}>
             <ScrollView style={styles.container}>
                 <View style={styles.cardWrapper}>
-
                     <View style={styles.cardList}>
-
                         <View style={{
                             flexDirection: 'row',
                             // flex: 1, 
@@ -76,25 +74,13 @@ export default function UserItem(props) {
                             alignItems: 'center',
                         }}>
                             <Text style={styles.no}>{props.no}</Text>
-
                             <View style={styles.icon}>
                                 <Icon name="person-circle-outline" size={50} color="#173e07" />
                             </View>
-
                             <View style={styles.card}>
                                 {user.isEdit ?
                                     <TextInput
-                                        style={{
-                                            height: 25,
-                                            width: "100%",
-                                            marginTop: -5,
-                                            fontSize: 18,
-                                            fontWeight: "bold",
-                                            paddingTop: 2,
-                                            paddingBottom: 2,
-                                            color: '#4a8122'
-
-                                        }}
+                                        style={styles.userName}
                                         placeholderTextColor="gray"
                                         placeholder="Masukan Nama!"
                                         onChangeText={name => setUser({ ...user, name })}
@@ -108,21 +94,11 @@ export default function UserItem(props) {
 
                                 {user.isEdit ?
                                     <TextInput
-                                        style={{
-                                            height: 25,
-                                            paddingVertical: 5,
-                                            width: "100%",
-                                            marginBottom: -5,
-                                            fontSize: 15,
-                                            paddingTop: 2,
-                                            paddingBottom: 2,
-                                            color: '#4a8122'
-                                        }}
+                                        style={styles.userPhone}
                                         placeholderTextColor="gray"
                                         placeholder="Masukan Nomor!"
                                         onChangeText={phone => setUser({ ...user, phone })}
                                         defaultValue={user.phone}
-
                                     />
                                     :
                                     <View>
@@ -130,7 +106,6 @@ export default function UserItem(props) {
                                     </View>
                                 }
                             </View>
-
                         </View>
 
 
@@ -159,84 +134,31 @@ export default function UserItem(props) {
                                 </TouchableOpacity>
                             }
                         </View>
-
                     </View>
-
                 </View>
             </ScrollView>
 
             <View>
                 <Modal isVisible={user.modal}>
-                    <View style={{
-                        backgroundColor: '#ffffff',
-                        paddingVertical: 20,
-                        paddingHorizontal: 20,
-                        borderRadius: 6,
-                    }}>
-                        <View style={{
-                            alignItems: 'center',
-                            borderColor: '#ffffff',
-                            bottom: 85
-                        }}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalListIcon}>
                             <Icon name="alert-circle" size={80} color="#173e07"
-                                style={{
-                                    position: 'absolute',
-                                    backgroundColor: '#ffffff',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    width: 85,
-                                    height: 85,
-                                    paddingHorizontal: 5,
-                                    borderRadius: 50,
-                                    zIndex: 1
-                                }} />
+                                style={styles.modalIcon} />
                         </View>
 
-                        <Text style={{
-                            fontSize: 25,
-                            fontWeight: 'bold',
-                            color: '#173e07',
-                            textAlign: 'center',
-                            marginTop: 0
-                        }}>
-                            Deleted Confirmation
-                        </Text>
-                        <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray'}}>
+                        <Text style={styles.titleModal}>Deleted Confirmation</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 17, color: 'gray' }}>
                             Are you sure you want delete it?
                         </Text>
                         <Text style={{ textAlign: 'center', fontSize: 17, fontWeight: 'bold', color: '#173e07' }}>
                             " {props.data.name} "
                         </Text>
 
-                        <View style={{
-                            marginTop: 15,
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-                            width: '100%',
-                        }}>
-                            <TouchableOpacity style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: '#85b35a',
-                                paddingVertical: 5,
-                                borderRadius: 50,
-                                elevation: 3,
-                                width: '20%',
-                                marginHorizontal: 7
-                            }} onPress={hideModal}>
+                        <View style={styles.buttonModal}>
+                            <TouchableOpacity style={styles.modalNo} onPress={hideModal}>
                                 <Text style={{ color: '#ffffff' }}> No</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: '#4a8122',
-                                paddingVertical: 5,
-                                borderRadius: 50,
-                                elevation: 3,
-                                width: '20%',
-                                marginHorizontal: 7
-                            }} onPress={props.remove}>
+                            <TouchableOpacity style={styles.modalYes} onPress={props.remove}>
                                 <Text style={{ color: '#ffffff' }}> Yes</Text>
                             </TouchableOpacity>
                         </View>
@@ -290,6 +212,26 @@ const styles = StyleSheet.create({
         // width: '75%',
         width: '70%',
     },
+    userName: {
+        height: 25,
+        width: "100%",
+        marginTop: -5,
+        fontSize: 18,
+        fontWeight: "bold",
+        paddingTop: 2,
+        paddingBottom: 2,
+        color: '#4a8122'
+    },
+    userPhone: {
+        height: 25,
+        paddingVertical: 5,
+        width: "100%",
+        marginBottom: -5,
+        fontSize: 15,
+        paddingTop: 2,
+        paddingBottom: 2,
+        color: '#4a8122'
+    },
     cardTitleName: {
         color: '#173e07',
         fontWeight: '700',
@@ -307,5 +249,61 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // width: 82,
         width: "35%"
+    },
+    modalContainer: {
+        backgroundColor: '#ffffff',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        borderRadius: 6,
+    },
+    modalListIcon: {
+        alignItems: 'center',
+        borderColor: '#ffffff',
+        bottom: 85
+    },
+    modalIcon: {
+        position: 'absolute',
+        backgroundColor: '#ffffff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 85,
+        height: 85,
+        paddingHorizontal: 5,
+        borderRadius: 50,
+        zIndex: 1
+    },
+    titleModal: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#173e07',
+        textAlign: 'center',
+        marginTop: 0
+    },
+    buttonModal: {
+        marginTop: 15,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '100%',
+    },
+    modalNo: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#85b35a',
+        paddingVertical: 5,
+        borderRadius: 50,
+        elevation: 3,
+        width: '20%',
+        marginHorizontal: 7
+    },
+    modalYes: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#4a8122',
+        paddingVertical: 5,
+        borderRadius: 50,
+        elevation: 3,
+        width: '20%',
+        marginHorizontal: 7
     },
 });
