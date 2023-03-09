@@ -190,11 +190,14 @@ export default function UserItem(props) {
                             Deleted Confirmation
                         </Text>
                         <Text style={{ textAlign: 'center', fontSize: 17, }}>
-                            Are you sure, you want delete it?
+                            Are you sure you want delete it?
                         </Text>
+                        <Text style={{textAlign: 'center', fontSize: 17, fontWeight: 'bold'}}>
+                            " {props.data.name} "
+                            </Text>
 
                         <View style={{
-                            marginTop: 20,
+                            marginTop: 15,
                             flexDirection: 'row',
                             flexWrap: 'wrap',
                             justifyContent: 'center',
