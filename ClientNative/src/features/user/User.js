@@ -48,7 +48,7 @@ export default function User(props) {
                             <Text style={{
                                 fontSize: 32,
                                 fontWeight: '700',
-                                color: '#173e07',
+                                color: '#4a8122',
                                 marginTop: 10,
                                 textDecorationLine: user.activeMenu == 'Search' || user.activeMenu == 'Add' ? 'underline' : 'none',
                             }}>
