@@ -15,7 +15,7 @@ export const readUserAsync = createAsyncThunk(
     async () => {
         try {
             const response = await readUser();
-            // console.log('ini data', response.data.data.users.length);
+            console.log('ini data readuser', response.data.data.users.length);
             return response.data.data;
         } catch (error) {
             console.log('readUser error', error);
@@ -26,7 +26,6 @@ export const readUserAsync = createAsyncThunk(
 export const createUserAsync = createAsyncThunk(
     'user/createUser',
     async ({ id, name, phone }, thunkAPI) => {
-        // console.log('ini thunk', thunkAPI);
         const { getState } = thunkAPI
         let state = getState()
         try {
@@ -72,7 +71,7 @@ export const deleteUserAsync = createAsyncThunk(
 export const loadUserAsync = createAsyncThunk(
     'user/loadUser',
     async (arg, thunkAPI) => {
-        // console.log('ke load');
+        console.log('ke load');
         const { getState } = thunkAPI
         let state = getState()
         if (state.user.params.page < state.user.params.pages) {
@@ -80,6 +79,7 @@ export const loadUserAsync = createAsyncThunk(
                 ...state.user.params,
                 page: state.user.params.page + 1
             }
+            console.log('ini loaduser', state.user.params);
             try {
                 const response = await loadUser(params);
                 return { value: response.data.data.users, params };
@@ -104,15 +104,14 @@ export const searchUserAsync = createAsyncThunk(
             ...query,
             page: 1
         }
-        // console.log('ini thunk', thunkAPI);
         try {
             const response = await searchUser(params);
             params = {
                 ...params,
                 pages: response.data.data.pages
             }
-            // console.log('ini response search', response);
-            // console.log('ini params search', params);
+            console.log('ini response search', response);
+            console.log('ini params search', params);
             return { value: response.data.data.users, params };
         } catch (error) {
             console.log('searchUser error', error);
@@ -150,12 +149,10 @@ export const userSlice = createSlice({
             })
         },
         reset: (state, action) => {
-            state.params = {
-                page: 1,
-                pages: 1,
-                query: {}
-            }
-        },
+            state.params.name = ""
+            state.params.phone = ""
+            state.params.page = 1
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -264,7 +261,8 @@ export const edit = (id, name, phone) => (dispatch, getState) => {
 
 export const resetSearch = () => async (dispatch, getState) => {
     await dispatch(reset())
-    dispatch(loadUserAsync())
+    dispatch(readUserAsync())
+    console.log('ini reset');
 };
 
 export default userSlice.reducer;

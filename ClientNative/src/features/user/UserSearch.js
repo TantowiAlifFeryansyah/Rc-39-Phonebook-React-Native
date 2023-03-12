@@ -17,10 +17,10 @@ export default function UserSearch() {
         dispatch(searchUserAsync({ name: user.name, phone: user.phone }))
     }, [dispatch, user])
 
-    const cancelSearch = () => {
+    const cancelSearch = useCallback(() => {
         dispatch(resetSearch())
         setUser({ name: '', phone: '' })
-    }
+    }, [dispatch])
 
     return (
         <View>
@@ -66,7 +66,6 @@ export default function UserSearch() {
                     borderRadius: 5,
                     justifyContent: 'center',
                     elevation: 2,
-
                 }} onPress={cancelSearch}>
                     <Text style={{
                         textAlign: 'center',

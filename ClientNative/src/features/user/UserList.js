@@ -32,9 +32,11 @@ export default function UserList() {
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={users}
+                    initialNumToRender={7}
                     renderItem={({ item, index }) => (
                         <UserItem
                             key={item.id}
+                            // no={item.id}
                             no={index + 1}
                             data={item}
                             sent={item.sent}
@@ -47,9 +49,9 @@ export default function UserList() {
                     onEndReachedThreshold={0.5}
                     onEndReached={() => dispatch(loadUserAsync())}
                     style={{
-                        maxHeight: 580,
-                        // borderWidth: 1,  
-                        // width: "96%" 
+                        maxHeight: 290,
+                        borderWidth: 1,  
+                        // width: "100%" 
                     }}
                 />
             </View>
